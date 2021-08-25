@@ -54,7 +54,7 @@ function checkPalindrome() {
         }
 
         
-            outputDiv.innerHTML = "The nearest palindrome date in future is " + fwdCount + " days ahead and it is " + nextDate[0] + "-" + nextDate[1] + "-" + nextDate[2]+".<br>"+
+            outputDiv.innerHTML = "<h2>Oops! Your BirthDay is not a Palindrome</h2>The nearest palindrome date in future is " + fwdCount + " days ahead and it is " + nextDate[0] + "-" + nextDate[1] + "-" + nextDate[2]+".<br>"+
             "The nearest palindrome date in past is " + bwdCount + " days in past and it is " + prevDate[0] + "-" + prevDate[1] + "-" + prevDate[2]+".";
 
         
