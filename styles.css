@@ -63,3 +63,20 @@ body{
     font-size: larger;
     margin: 1rem 0;
 }
+
+/* footer*/
+
+footer{
+    position: absolute;
+    bottom:0;
+    right: 0;
+    left: 0;
+}
+footer a{
+    padding: 1rem 1rem;
+}
+
+footer i{
+    color: var(--primary-color);
+    font-size: 2rem;
+}
