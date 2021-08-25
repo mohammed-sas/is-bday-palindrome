@@ -1,31 +1,66 @@
 const dob = document.querySelector("#birth-date");
 const submitBtn = document.querySelector("#submit-btn");
+const outputDiv = document.querySelector("#output");
+const imgDiv = document.querySelector('.img-div');
 
 
-submitBtn.addEventListener("click", checkPalindrome);
+submitBtn.addEventListener("click", function(){
+    imgDiv.style.display="block";
+    outputDiv.style.display="none";
+    setTimeout(checkPalindrome,3000);
+});
 
 function checkPalindrome() {
+    imgDiv.style.display="none";
+    outputDiv.style.display="block";
     let dobValueArray = dob.value.split("-");
     let year = dobValueArray[0];
     let month = dobValueArray[1];
     let day = dobValueArray[2];
+    console.log(day,month,year);
     let result = palindrome(day, month, year);
-    if (result)
-        console.log("it is a palindrome");
+    if (result){
+        outputDiv.innerText="Wow!!! Your birthday is a Palindrome."
+    }
     else {
         console.log("not a palindrome");
         let nextDate = getNextDate(day, month, year);
 
-        let count =0;
+        let fwdCount = 0;
         while (true) {
-            result = palindrome(String(nextDate[0]), String(nextDate[1]),String(nextDate[2]));
-            count++;
-            if(result){
-                console.log("the next date is "+count+" days away and it is "+nextDate);
+            result = palindrome(String(nextDate[0]), String(nextDate[1]), String(nextDate[2]));
+            console.log(String(nextDate[0]), String(nextDate[1]), String(nextDate[2]));
+            fwdCount++;
+            if (result) {
+                console.log("the next date is " + fwdCount + " days away and it is " + nextDate);
                 break;
             }
-            nextDate = getNextDate(nextDate[0],nextDate[1],nextDate[2]);
+            nextDate = getNextDate(nextDate[0], nextDate[1], nextDate[2]);
         }
+
+        let bwdCount = 0;
+        let prevDate = getPreviousDate(Number(day), Number(month), Number(year));
+        while (true) {
+            
+            result = palindrome(String(prevDate[0]), String(prevDate[1]), String(prevDate[2]));
+            bwdCount++;
+
+            if (result) {
+                console.log("the prev date is " + bwdCount + " days away and it is " + prevDate);
+                break;
+
+            }
+            prevDate = getPreviousDate(prevDate[0], prevDate[1], prevDate[2]);
+        }
+
+        
+            outputDiv.innerHTML = "The nearest palindrome date in future is " + fwdCount + " days ahead and it is " + nextDate[0] + "-" + nextDate[1] + "-" + nextDate[2]+".<br>"+
+            "The nearest palindrome date in past is " + bwdCount + " days in past and it is " + prevDate[0] + "-" + prevDate[1] + "-" + prevDate[2]+".";
+
+        
+        
+
+        
 
     }
 
@@ -66,8 +101,6 @@ function getNextDate(dd, mm, yy) {
     } else if (dd > daysInMonth[mm - 1]) {
         dd = 1;
         ++mm;
-    } else {
-        ++mm;
     }
 
 
@@ -76,10 +109,55 @@ function getNextDate(dd, mm, yy) {
         ++yy;
     }
 
+    if(dd<10)
+        dd= '0'+dd;
+    if(mm<10){
+
+        mm='0'+parseInt(mm);
+    }
+       
+
     return [dd, mm, yy];
 
 
 }
+
+
+function getPreviousDate(dd, mm, yy) {
+
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    dd--;
+    if (dd === 0) {
+        mm--;
+        if (mm === 2) {
+            if (leapYear(yy)) {
+                dd = 29;
+            } else {
+                dd = 28;
+            }
+
+        } else if (mm == 0) {
+            mm = 12;
+            dd = daysInMonth[mm - 1];
+            yy--;
+        } else {
+            dd = daysInMonth[mm-1];
+        }
+
+    }
+
+    if(dd<10)
+        dd= '0'+dd;
+    if(mm<10)
+        mm='0'+Number(mm);
+
+
+    return [(dd), (mm),(yy)];
+
+
+}
+
+
 
 function leapYear(yy) {
     if (yy % 400 === 0)
