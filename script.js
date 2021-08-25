@@ -5,6 +5,9 @@ const imgDiv = document.querySelector('.img-div');
 
 
 submitBtn.addEventListener("click", function(){
+    if(dob.value===""){
+        alert("Enter a date");
+    }
     imgDiv.style.display="block";
     outputDiv.style.display="none";
     setTimeout(checkPalindrome,3000);
