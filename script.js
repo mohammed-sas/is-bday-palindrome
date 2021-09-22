@@ -21,7 +21,7 @@ function checkPalindrome() {
     let year = dobValueArray[0];
     let month = dobValueArray[1];
     let day = dobValueArray[2];
-    console.log(day,month,year);
+   
     let result = palindrome(day, month, year);
     if (result){
         outputDiv.innerText="Wow!!! Your birthday is a Palindrome."
@@ -58,8 +58,8 @@ function checkPalindrome() {
         }
 
         
-            outputDiv.innerHTML = "<h2>Oops! Your BirthDay is not a Palindrome</h2>The nearest palindrome date in future is " + fwdCount + " days ahead and it is " + nextDate[0] + "-" + nextDate[1] + "-" + nextDate[2]+".<br>"+
-            "The nearest palindrome date in past is " + bwdCount + " days in past and it is " + prevDate[0] + "-" + prevDate[1] + "-" + prevDate[2]+".";
+            outputDiv.innerHTML = "<h2>Oops! Your BirthDay is not a Palindrome</h2>The nearest palindrome date after your birthdate is " + fwdCount + " days ahead and it is " + nextDate[0] + "-" + nextDate[1] + "-" + nextDate[2]+".<br>"+
+            "The nearest palindrome date before your birthdate is " + bwdCount + " days in past and it is " + prevDate[0] + "-" + prevDate[1] + "-" + prevDate[2]+".";
 
         
         
